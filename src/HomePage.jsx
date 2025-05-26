@@ -20,7 +20,7 @@ function HomePage() {
       <Row>
         <Col>
           <Button
-            href={"./product-listing"}
+            href={"/product-listing"}
             variant="outline-info"
             className="mt-2"
           >

@@ -13,7 +13,7 @@ function NavBar() {
           <Nav.Link as={NavLink} to="/" activeclassname="active">
             Home
           </Nav.Link>
-          <Nav.Link as={NavLink} to="/" activeclassname="active">
+          <Nav.Link as={NavLink} to="/product-listing" activeclassname="active">
             Products
           </Nav.Link>
           <NavDropdown title="Change Products" id="basic-nav-dropdown">
