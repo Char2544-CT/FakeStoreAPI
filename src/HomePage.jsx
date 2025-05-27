@@ -13,6 +13,9 @@ function HomePage() {
             Here you can view, update, delete, or edit our products all from one
             simple app!
           </p>
+          <p>
+            <code>(For Testing Purposes Only. Testing API Used)</code>
+          </p>
           <p className="text-muted">Get started down below &darr;</p>
         </Col>
       </Row>

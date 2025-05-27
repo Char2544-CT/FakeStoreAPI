@@ -68,7 +68,9 @@ function ProductListing() {
                   className="mb-3"
                   style={{ maxHeight: "200px", objectFit: "contain" }}
                 />
-                <Button href={`/`}>Product Details</Button>
+                <Button href={`/product-details/${product.id}`}>
+                  Product Details
+                </Button>
               </Card.Body>
             </Card>
           </Col>
