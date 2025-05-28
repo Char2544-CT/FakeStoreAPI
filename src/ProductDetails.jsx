@@ -5,6 +5,7 @@ import Container from "react-bootstrap/Container";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
+import DeleteModal from "./Modal";
 
 function ProductDetails() {
   const { id } = useParams();
@@ -12,6 +13,8 @@ function ProductDetails() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const apiUrl = `https://fakestoreapi.com/products/${id}`;
+  const [showModal, setShowModal] = useState(false);
+  const handleCloseModal = () => setShowModal(false);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -68,9 +71,20 @@ function ProductDetails() {
           <Card.Text>{product.description}</Card.Text>
           <Card.Text>Price: ${product.price}</Card.Text>
           <Card.Text>Category: {product.category}</Card.Text>
-          <Button variant="primary">Add to Cart</Button>
+          <Button variant="primary">Add to Cart</Button>{" "}
+          {/*OffCanvas Would be Nice*/}
+          <Button variant="danger" onClick={() => setShowModal(true)}>
+            Delete from API
+          </Button>{" "}
+          {/*Modal Pops up confirming deletion from the API*/}
         </Card.Body>
       </Card>
+      <DeleteModal
+        product={product}
+        clicked={true}
+        showModal={showModal}
+        handleCloseModal={handleCloseModal}
+      />
     </Container>
   );
 }
