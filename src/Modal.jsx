@@ -22,7 +22,7 @@ const DeleteModal = ({ product, clicked, showModal, handleCloseModal }) => {
           <Button variant="primary" onClick={handleCloseModal}>
             Close
           </Button>
-          <Button variant="warning">Delete</Button>
+          <Button variant="danger">Delete</Button>
         </Modal.Footer>
       </Modal>
     </>
@@ -30,4 +30,4 @@ const DeleteModal = ({ product, clicked, showModal, handleCloseModal }) => {
 };
 
 export default DeleteModal;
-//Need to Connect This Modal to ProductDetails Button and DeleteProduct.jsx
+//Need to Connect This Modal and DeleteProduct.jsx

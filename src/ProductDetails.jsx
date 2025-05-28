@@ -6,6 +6,7 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import DeleteModal from "./Modal";
+import OffCanvasCart from "./OffCanvasCart";
 
 function ProductDetails() {
   const { id } = useParams();
@@ -14,7 +15,9 @@ function ProductDetails() {
   const [error, setError] = useState(null);
   const apiUrl = `https://fakestoreapi.com/products/${id}`;
   const [showModal, setShowModal] = useState(false);
+  const [showOffCanvas, setShowOffCanvas] = useState(false);
   const handleCloseModal = () => setShowModal(false);
+  const handleCloseOffCanvas = () => setShowOffCanvas(false);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -71,7 +74,9 @@ function ProductDetails() {
           <Card.Text>{product.description}</Card.Text>
           <Card.Text>Price: ${product.price}</Card.Text>
           <Card.Text>Category: {product.category}</Card.Text>
-          <Button variant="primary">Add to Cart</Button>{" "}
+          <Button variant="primary" onClick={() => setShowOffCanvas(true)}>
+            Add to Cart
+          </Button>{" "}
           {/*OffCanvas Would be Nice*/}
           <Button variant="danger" onClick={() => setShowModal(true)}>
             Delete from API
@@ -84,6 +89,11 @@ function ProductDetails() {
         clicked={true}
         showModal={showModal}
         handleCloseModal={handleCloseModal}
+      />
+      <OffCanvasCart
+        product={product}
+        showOffCanvas={showOffCanvas}
+        handleCloseOffCanvas={handleCloseOffCanvas}
       />
     </Container>
   );
