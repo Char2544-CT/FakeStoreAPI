@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Container from "react-bootstrap/Container";
@@ -18,6 +18,7 @@ function ProductDetails() {
   const [showOffCanvas, setShowOffCanvas] = useState(false);
   const handleCloseModal = () => setShowModal(false);
   const handleCloseOffCanvas = () => setShowOffCanvas(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -34,7 +35,20 @@ function ProductDetails() {
     if (id) {
       fetchProduct();
     }
-  }, [id]); // Fetch product details when the component mounts or when the ID changes
+  }, [id]);
+  // Fetch product details when the component mounts or when the ID changes
+
+  const handleDelete = async () => {
+    try {
+      await axios.delete(apiUrl);
+      setShowModal(false);
+      // Redirect to product listing after successful delete with useNavigate
+      navigate("/product-listing");
+      alert("product deleted");
+    } catch (error) {
+      setError(`Error deleting product: ${product.id}...${error.message}`);
+    }
+  };
 
   if (loading) {
     return (
@@ -86,9 +100,9 @@ function ProductDetails() {
       </Card>
       <DeleteModal
         product={product}
-        clicked={true}
         showModal={showModal}
         handleCloseModal={handleCloseModal}
+        onDelete={handleDelete}
       />
       <OffCanvasCart
         product={product}

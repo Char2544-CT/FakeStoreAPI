@@ -1,7 +1,7 @@
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
-const DeleteModal = ({ product, clicked, showModal, handleCloseModal }) => {
+const DeleteModal = ({ product, showModal, handleCloseModal, onDelete }) => {
   return (
     <>
       <Modal show={showModal} onHide={handleCloseModal}>
@@ -9,20 +9,20 @@ const DeleteModal = ({ product, clicked, showModal, handleCloseModal }) => {
           <Modal.Title>Delete From API?</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {clicked && (
-            <>
-              <p>
-                Are You Sure You Want to Delete <b>{product.title}</b> from the
-                API?
-              </p>
-            </>
-          )}
+          <>
+            <p>
+              Are You Sure You Want to Delete <b>{product.title}</b> from the
+              API?
+            </p>
+          </>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" onClick={handleCloseModal}>
             Close
           </Button>
-          <Button variant="danger">Delete</Button>
+          <Button variant="danger" onClick={onDelete}>
+            Delete
+          </Button>
         </Modal.Footer>
       </Modal>
     </>
@@ -30,4 +30,4 @@ const DeleteModal = ({ product, clicked, showModal, handleCloseModal }) => {
 };
 
 export default DeleteModal;
-//Need to Connect This Modal and DeleteProduct.jsx
+//Handles Close and Delete from API buttons and Modal.
