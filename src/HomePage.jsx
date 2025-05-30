@@ -2,6 +2,7 @@ import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
+import Carousel from "./Carousel";
 
 function HomePage() {
   return (
@@ -20,12 +21,16 @@ function HomePage() {
         </Col>
       </Row>
 
+      <Row className="mt-4 mb-4">
+        <Carousel />
+      </Row>
+
       <Row>
         <Col>
           <Button
             href={"/product-listing"}
             variant="outline-info"
-            className="mt-2"
+            className="mt-4"
           >
             View Products
           </Button>

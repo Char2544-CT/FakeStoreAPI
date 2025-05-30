@@ -91,7 +91,7 @@ function ProductDetails() {
           <Button variant="primary" onClick={() => setShowOffCanvas(true)}>
             Add to Cart
           </Button>{" "}
-          {/*OffCanvas Would be Nice*/}
+          {/*OffCanvas*/}
           <Button variant="danger" onClick={() => setShowModal(true)}>
             Delete from API
           </Button>{" "}
