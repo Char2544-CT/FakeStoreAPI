@@ -16,10 +16,9 @@ function NavBar() {
           <Nav.Link as={NavLink} to="/product-listing" activeclassname="active">
             Products
           </Nav.Link>
-          <NavDropdown title="Change Products" id="basic-nav-dropdown">
-            <NavDropdown.Item href="/">Add Product</NavDropdown.Item>
-            <NavDropdown.Item href="/">Edit Product</NavDropdown.Item>
-          </NavDropdown>
+          <Nav.Link as={NavLink} to="/add-product" activeclassname="active">
+            Add Product
+          </Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

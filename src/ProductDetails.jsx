@@ -96,6 +96,9 @@ function ProductDetails() {
             Delete from API
           </Button>{" "}
           {/*Modal Pops up confirming deletion from the API*/}
+          <Button variant="warning" href="/edit-product">
+            Edit Product
+          </Button>
         </Card.Body>
       </Card>
       <DeleteModal
