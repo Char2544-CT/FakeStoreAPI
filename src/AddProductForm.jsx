@@ -7,9 +7,11 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Alert from "react-bootstrap/Alert";
 import { useState } from "react";
+import axios from "axios";
 
 const AddProduct = () => {
   const [showAlert, setShowAlert] = useState(false);
+  const [error, setError] = useState(null);
 
   //Yup Validation
   const validationSchema = Yup.object({
@@ -30,11 +32,17 @@ const AddProduct = () => {
       category: "",
     },
     validationSchema,
-    onSubmit: (values) => {
-      console.log(values);
-      formik.handleReset();
-      setShowAlert(true);
-      setTimeout(() => setShowAlert(false), 5000); //Timeout after 3 secs
+    onSubmit: async (values) => {
+      try {
+        await axios.post("https://fakestoreapi.com/products", values);
+        console.log(values);
+        formik.handleReset();
+        setShowAlert(true);
+        setError(null);
+        setTimeout(() => setShowAlert(false), 5000); //Timeout after 3 secs
+      } catch (error) {
+        setError(`Error posting product. Please try again ${error.message}`);
+      }
     },
   });
 
@@ -136,6 +144,15 @@ const AddProduct = () => {
                 onClose={() => setShowAlert(false)}
               >
                 Product created successfully!
+              </Alert>
+            )}
+            {error && (
+              <Alert
+                variant="danger"
+                dismissible
+                onClose={() => setError(null)}
+              >
+                {error}
               </Alert>
             )}
           </Form>

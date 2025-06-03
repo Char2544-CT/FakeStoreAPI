@@ -6,10 +6,40 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Alert from "react-bootstrap/Alert";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const EditProduct = () => {
+  const { id } = useParams();
   const [showAlert, setShowAlert] = useState(false);
+  const [error, setError] = useState(null);
+  const [initialValues, setInitialValues] = useState({
+    product: "",
+    price: "",
+    description: "",
+    category: "",
+  });
+
+  //Fetch product when component mounts or id changes
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const response = await axios.get(
+          `https://fakestoreapi.com/products/${id}`
+        );
+        setInitialValues({
+          product: response.data.title,
+          price: response.data.price,
+          description: response.data.description,
+          category: response.data.category,
+        });
+      } catch (err) {
+        setError("Failed to fetch product for editing.");
+      }
+    };
+    if (id) fetchProduct();
+  }, [id]);
 
   //Yup Validation
   const validationSchema = Yup.object({
@@ -23,18 +53,19 @@ const EditProduct = () => {
 
   //Formik
   const formik = useFormik({
-    initialValues: {
-      product: "",
-      price: "",
-      description: "",
-      category: "",
-    },
+    enableReinitialize: true, //Updates when initialValues changes
+    initialValues,
     validationSchema,
-    onSubmit: (values) => {
-      console.log(values);
-      formik.handleReset();
-      setShowAlert(true);
-      setTimeout(() => setShowAlert(false), 5000); //Timeout after 3 secs
+    onSubmit: async (values) => {
+      try {
+        await axios.put(`https://fakestoreapi.com/products/${id}`, values);
+        console.log(values);
+        formik.handleReset();
+        setShowAlert(true);
+        setTimeout(() => setShowAlert(false), 5000); //Timeout after 3 secs
+      } catch (error) {
+        setError(`Error updating product: ${error.message}`);
+      }
     },
   });
 
@@ -136,6 +167,15 @@ const EditProduct = () => {
                 onClose={() => setShowAlert(false)}
               >
                 Product edited successfully!
+              </Alert>
+            )}
+            {error && (
+              <Alert
+                variant="danger"
+                dismissible
+                onClose={() => setError(null)}
+              >
+                {error}
               </Alert>
             )}
           </Form>
