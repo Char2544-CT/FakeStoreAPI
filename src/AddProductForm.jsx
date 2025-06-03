@@ -39,7 +39,7 @@ const AddProduct = () => {
         formik.handleReset();
         setShowAlert(true);
         setError(null);
-        setTimeout(() => setShowAlert(false), 5000); //Timeout after 3 secs
+        setTimeout(() => setShowAlert(false), 5000); //Timeout after 5 secs
       } catch (error) {
         setError(`Error posting product. Please try again ${error.message}`);
       }
@@ -69,6 +69,7 @@ const AddProduct = () => {
                 onBlur={formik.handleBlur}
                 isInvalid={formik.touched.product && !!formik.errors.product}
               />
+              {/*Double exclaimation points convert value to a boolean*/}
               <Form.Control.Feedback type="invalid">
                 {formik.errors.product}
               </Form.Control.Feedback>

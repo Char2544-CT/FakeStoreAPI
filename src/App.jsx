@@ -5,6 +5,7 @@ import ProductListing from "./ProductListing";
 import ProductDetails from "./ProductDetails";
 import AddProduct from "./AddProductForm";
 import EditProduct from "./EditProductForm";
+import NotFound from "./NotFound";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/add-product" element={<AddProduct />} />
         <Route path="/edit-product/:id" element={<EditProduct />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );
